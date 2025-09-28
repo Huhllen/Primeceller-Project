@@ -1,0 +1,14 @@
+ Private Sub header_Paint(sender As Object, e As PaintEventArgs) Handles header.Paint
+     Dim rect As Rectangle = header.ClientRectangle
+
+     Using brush As New LinearGradientBrush(rect, Color.Empty, Color.Empty, LinearGradientMode.Horizontal)
+
+         Dim cb As New ColorBlend()
+         cb.Colors = {Color.Blue, Color.LightSkyBlue, Color.Blue}
+         Dim value As Single() = {0.0F, 0.5F, 1.0F}
+         cb.Positions = value
+
+         brush.InterpolationColors = cb
+
+         e.Graphics.FillRectangle(brush, rect)
+     End Using
