@@ -1,0 +1,48 @@
+Imports System.Configuration
+Imports System.Drawing.Drawing2D
+
+Public Class Form1
+    Public Property PanelMain As Object
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.WindowState = FormWindowState.Maximized
+        Me.textheader.Parent = Me.header
+        Me.textheader.BackColor = Color.Transparent
+        Me.headtime.Parent = Me.header
+        Me.headtime.BackColor = Color.Transparent
+        Timer1.Enabled = True
+    End Sub
+
+    Private Sub header_Paint(sender As Object, e As PaintEventArgs) Handles header.Paint
+        Dim rect As Rectangle = header.ClientRectangle
+
+        Using brush As New LinearGradientBrush(rect, Color.Empty, Color.Empty, LinearGradientMode.Horizontal)
+
+            Dim cb As New ColorBlend()
+            cb.Colors = {Color.Blue, Color.LightSkyBlue, Color.Blue}
+            Dim value As Single() = {0.0F, 0.5F, 1.0F}
+            cb.Positions = value
+
+            brush.InterpolationColors = cb
+
+            e.Graphics.FillRectangle(brush, rect)
+        End Using
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        headtime.Text = Date.Now.ToString("dd-MM-yyyy | hh:mm:ss tt")
+    End Sub
+
+    Sub switchPanel(ByVal frm As Form)
+        Panel1.Controls.Clear()
+
+        frm.TopLevel = False
+        frm.FormBorderStyle = FormBorderStyle.None
+        frm.Dock = DockStyle.Fill
+
+        Panel1.Controls.Add(frm)
+        frm.Show()
+    End Sub
+
+  
+End Class
