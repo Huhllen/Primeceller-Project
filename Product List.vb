@@ -1,4 +1,4 @@
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
 
 Namespace Dahboard
 
@@ -22,7 +22,6 @@ Namespace Dahboard
                     MessageBox.Show("Failed: " & ex.Message)
                 End Try
             End Using
-
 
             Dim dialog As New ProductDialog()
             If dialog.ShowDialog() = DialogResult.OK Then
